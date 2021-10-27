@@ -7,7 +7,7 @@ describe('Cypress Test: Dashboard Component', async () => {
   it('should render the Dashboard page', () => {
     cy.goToHomePage();
     cy.get('.sc-hKFxyN').should('contain', 'Explore repositórios no GitHub');
-    cy.get('input').should(
+    cy.get('[data-cy="search-input"]').should(
       'have.attr',
       'placeholder',
       'Digite o nome do repositório',
@@ -18,7 +18,11 @@ describe('Cypress Test: Dashboard Component', async () => {
   it('should render empty input error', () => {
     cy.goToHomePage();
     cy.get('[data-testid=submit]').click();
-    cy.get('input').should('have.css', 'border-color', 'rgb(197, 48, 48)');
+    cy.get('[data-cy="search-input"]').should(
+      'have.css',
+      'border-color',
+      'rgb(197, 48, 48)',
+    );
     cy.get('.sc-jSFjdj')
       .contains('Type repository author/name')
       .should('be.visible');
@@ -26,9 +30,13 @@ describe('Cypress Test: Dashboard Component', async () => {
 
   it('should render searching repository error', () => {
     cy.goToHomePage();
-    cy.get('input').type('notfound');
+    cy.get('[data-cy="search-input"]').type('notfound');
     cy.get('[data-testid=submit]').click();
-    cy.get('input').should('have.css', 'border-color', 'rgb(197, 48, 48)');
+    cy.get('[data-cy="search-input"]').should(
+      'have.css',
+      'border-color',
+      'rgb(197, 48, 48)',
+    );
     cy.get('.sc-jSFjdj')
       .contains('Error while searching this repository')
       .should('be.visible');
@@ -36,11 +44,11 @@ describe('Cypress Test: Dashboard Component', async () => {
 
   it('should searching github repository', () => {
     cy.intercept('GET', 'https://api.github.com/repos/facebook/react', {
-      fixture: 'react_repo.json',
+      fixture: 'repo.json',
     });
 
     cy.goToHomePage();
-    cy.get('input').type('facebook/react');
+    cy.get('[data-cy="search-input"]').type('facebook/react');
     cy.get('[data-testid=submit]').click();
 
     cy.get('[data-testid="facebook/react"]').should('be.visible');
@@ -48,11 +56,11 @@ describe('Cypress Test: Dashboard Component', async () => {
 
   it('should visit repository infos', () => {
     cy.intercept('GET', 'https://api.github.com/repos/facebook/react', {
-      fixture: 'react_repo.json',
+      fixture: 'repo.json',
     });
 
     cy.goToHomePage();
-    cy.get('input').type('facebook/react');
+    cy.get('[data-cy="search-input"]').type('facebook/react');
     cy.get('[data-testid=submit]').click();
     cy.get('[data-testid="facebook/react"]').should('be.visible');
     cy.get('[data-testid="facebook/react"]').click();

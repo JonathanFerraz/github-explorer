@@ -65,6 +65,7 @@ const Dashboard: React.FC = () => {
           value={repo}
           onChange={(e) => setRepo(e.target.value)}
           placeholder="Digite o nome do repositório"
+          data-cy="search-input"
         />
         <button data-testid="submit" type="submit">
           Pesquisar

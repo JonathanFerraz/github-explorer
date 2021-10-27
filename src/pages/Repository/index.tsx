@@ -54,7 +54,7 @@ const Repository: React.FC = () => {
     <>
       <Header>
         <img src={Logo} alt="GitHub Explorer" />
-        <Link to="/">
+        <Link data-cy="back-button" to="/">
           <FiChevronsLeft size={16} />
           Voltar
         </Link>
@@ -62,29 +62,33 @@ const Repository: React.FC = () => {
       {repo && (
         <Details>
           <header>
-            <img src={repo.owner.avatar_url} alt={repo.owner.login} />
+            <img
+              data-cy="owner-avatar"
+              src={repo.owner.avatar_url}
+              alt={repo.owner.login}
+            />
             <div>
-              <strong>{repo.full_name}</strong>
-              <p>{repo.description}</p>
+              <strong data-cy="repo-full-name">{repo.full_name}</strong>
+              <p data-cy="repo-description">{repo.description}</p>
             </div>
           </header>
           <ul>
             <li>
-              <strong>{repo.stargazers_count}</strong>
+              <strong data-cy="starts-count">{repo.stargazers_count}</strong>
               <span>Stars</span>
             </li>
             <li>
-              <strong>{repo.forks_count}</strong>
+              <strong data-cy="forks-count">{repo.forks_count}</strong>
               <span>Forks</span>
             </li>
             <li>
-              <strong>{repo.open_issues_count}</strong>
+              <strong data-cy="issues-count">{repo.open_issues_count}</strong>
               <span>Issues abertas</span>
             </li>
           </ul>
         </Details>
       )}
-      <Issues>
+      <Issues data-cy="repo-issues">
         {issues.map((issue) => (
           <a
             key={issue.id}
@@ -92,9 +96,9 @@ const Repository: React.FC = () => {
             rel="noopener noreferrer"
             target="_blank"
           >
-            <div>
-              <strong>{issue.title}</strong>
-              <p>{issue.user.login}</p>
+            <div data-cy="issue-info">
+              <strong data-cy="issue-title">{issue.title}</strong>
+              <p data-cy="user-login">{issue.user.login}</p>
             </div>
 
             <FiChevronRight size={20} />
