@@ -18,7 +18,8 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
     "coverage": "react-app-rewired test --coverage --watchAll=false",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "cypress open"
   },
   "jest": {
     "roots": [
@@ -63,6 +64,7 @@
     "@typescript-eslint/eslint-plugin": "4.0.1",
     "@typescript-eslint/parser": "4.0.1",
     "axios-mock-adapter": "^1.18.1",
+    "cypress": "^8.7.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-import-resolver-typescript": "^2.0.0",
