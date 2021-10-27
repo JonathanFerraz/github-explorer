@@ -35,6 +35,10 @@ describe('Cypress Test: Dashboard Component', async () => {
   });
 
   it('should searching github repository', () => {
+    cy.intercept('GET', 'https://api.github.com/repos/facebook/react', {
+      fixture: 'react_repo.json',
+    });
+
     cy.goToHomePage();
     cy.get('input').type('facebook/react');
     cy.get('[data-testid=submit]').click();
@@ -43,9 +47,14 @@ describe('Cypress Test: Dashboard Component', async () => {
   });
 
   it('should visit repository infos', () => {
+    cy.intercept('GET', 'https://api.github.com/repos/facebook/react', {
+      fixture: 'react_repo.json',
+    });
+
     cy.goToHomePage();
     cy.get('input').type('facebook/react');
     cy.get('[data-testid=submit]').click();
+    cy.get('[data-testid="facebook/react"]').should('be.visible');
     cy.get('[data-testid="facebook/react"]').click();
     cy.location('pathname').should('eq', '/repositories/facebook/react');
   });
